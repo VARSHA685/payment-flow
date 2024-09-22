@@ -18,8 +18,10 @@ A workflow builder built with ReactFlow that supports node resizing, undo/redo f
 3. Start the Development Server:
    npm run dev or npm start
 
-Core Features 4. Node Resizing Implementation:
-Node resizing is enabled using the NodeResizeControl component from ReactFlow. Each node's resizable property is set to true, allowing users to resize nodes. The dimensions of each node are stored in the node's state to persist changes.
+Core Features :-
+
+4. Node Resizing Implementation:
+   Node resizing is enabled using the NodeResizeControl component from ReactFlow. Each node's resizable property is set to true, allowing users to resize nodes. The dimensions of each node are stored in the node's state to persist changes.
 
 5. Undo/Redo Implementation:
    Undo/redo functionality is managed using two arrays: history and future. Every state change (such as node addition, deletion, or modification) is saved in the history array. When undo is triggered, the current state is moved to the future array while the previous state from history is restored. Redo moves the last undone state from future back to history.
