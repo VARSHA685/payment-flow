@@ -5,8 +5,8 @@ interface ToolbarProps {
   onAddNode: (provider: string) => void
   onUndo: () => void
   onRedo: () => void
-  onSave: () => void // Add onSave prop
-  onLoad: () => void // Add onLoad prop
+  onSave: () => void
+  onLoad: () => void
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({ onAddNode, onUndo, onRedo, onSave, onLoad }) => {

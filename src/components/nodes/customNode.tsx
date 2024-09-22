@@ -1,7 +1,17 @@
 import React from "react"
 import { Handle, NodeResizeControl } from "reactflow"
 
-const CustomNode = ({ data }) => {
+interface CustomNodeProps {
+  id: string
+  data: {
+    label: string
+    onDeleteNode: (id: string) => void
+  }
+}
+
+const CustomNode: React.FC<CustomNodeProps> = ({ id, data }) => {
+  const { label, onDeleteNode } = data
+
   return (
     <div
       style={{
@@ -11,10 +21,27 @@ const CustomNode = ({ data }) => {
         background: "white",
         position: "relative"
       }}>
+      <Handle type="target" position="top" />
       <Handle type="target" position="left" />
-      <div>{data.label}</div>
+      <div>{label}</div>
+      <button
+        style={{
+          position: "absolute",
+          top: "5px",
+          right: "5px",
+          background: "red",
+          color: "white",
+          borderRadius: "50%",
+          width: "20px",
+          height: "20px",
+          border: "none",
+          cursor: "pointer"
+        }}
+        onClick={() => onDeleteNode(id)}>
+        X
+      </button>
+      <Handle type="source" position="bottom" />
       <Handle type="source" position="right" />
-
       {/* Custom positioning for the resizing control */}
       <NodeResizeControl
         style={{

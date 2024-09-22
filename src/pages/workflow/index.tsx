@@ -7,14 +7,14 @@ import ReactFlow, {
   applyNodeChanges,
   applyEdgeChanges
 } from "reactflow"
-import CustomNode from "../../components/nodes/customNode" // Import your custom node
+import CustomNode from "../../components/nodes/customNode"
 import "reactflow/dist/style.css"
 import { initialNodes, initialEdges } from "./workflow.data"
 import { useWorkflowController } from "./workflow.controller"
 import Toolbar from "../../components/ui/toolbar"
 
 const nodeTypes = {
-  custom: CustomNode // Register the custom node
+  custom: CustomNode
 }
 
 const Workflow: React.FC = () => {
@@ -25,14 +25,24 @@ const Workflow: React.FC = () => {
 
   const { onConnect, addNode } = useWorkflowController(nodes, setNodes, edges, setEdges)
 
-  // Load workflow from local storage on component mount
+  // Delete node by ID ===============>
+  const handleDeleteNode = (nodeId) => {
+    const newNodes = nodes.filter((node) => node.id !== nodeId)
+    const newEdges = edges.filter((edge) => edge.source !== nodeId && edge.target !== nodeId)
+
+    setNodes(newNodes)
+    setEdges(newEdges)
+    updateHistory(newNodes, newEdges)
+  }
+
+  // Load workflow from local storage on component mount ============>
   useEffect(() => {
     const savedWorkflow = localStorage.getItem("workflow")
     if (savedWorkflow) {
       const { nodes: loadedNodes, edges: loadedEdges } = JSON.parse(savedWorkflow)
       setNodes(loadedNodes)
       setEdges(loadedEdges)
-      updateHistory(loadedNodes, loadedEdges) // Update history with loaded state
+      updateHistory(loadedNodes, loadedEdges)
     }
   }, [])
 
@@ -119,9 +129,11 @@ const Workflow: React.FC = () => {
         onSave={saveWorkflow}
         onLoad={loadWorkflow}
       />
-
       <ReactFlow
-        nodes={nodes}
+        nodes={nodes.map((node) => ({
+          ...node,
+          data: { ...node.data, onDeleteNode: handleDeleteNode }
+        }))}
         edges={edges}
         onNodesChange={onNodesChangeWrapper}
         onEdgesChange={onEdgesChangeWrapper}

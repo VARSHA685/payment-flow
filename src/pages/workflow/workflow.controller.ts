@@ -15,7 +15,7 @@ export const useWorkflowController = (nodes, setNodes, edges, setEdges) => {
   }
 
   const removeNode = (nodeId: string) => {
-    setNodes((nds) => nds.filter((node) => node.id !== nodeId)) // Filter out the node to be deleted
+    setNodes((nds) => nds.filter((node) => node.id !== nodeId))
   }
 
   return { onConnect, addNode, removeNode }

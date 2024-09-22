@@ -1,15 +1,3 @@
-// import { WorkflowNode } from "../../types"
-
-// // Initial nodes with payment providers
-// export const initialNodes: WorkflowNode[] = [
-//   { id: "1", type: "paymentProvider", position: { x: 100, y: 100 }, data: { label: "Google Pay" } },
-//   { id: "2", type: "paymentProvider", position: { x: 300, y: 100 }, data: { label: "Stripe" } },
-//   { id: "3", type: "paymentProvider", position: { x: 300, y: 100 }, data: { label: "Apple Pay" } }
-// ]
-
-// // Initial edges (no connections yet)
-// export const initialEdges = []
-
 import { WorkflowNode } from "../../types"
 export const initialNodes: WorkflowNode[] = [
   //   {

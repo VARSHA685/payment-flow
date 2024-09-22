@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Workflow Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A workflow builder built with ReactFlow that supports node resizing, undo/redo functionality, and validation.
 
-Currently, two official plugins are available:
+## Setup Instructions
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the Repository:
 
-## Expanding the ESLint configuration
+   ```bash
+   git clone <repository-url>
+   cd <project-directory>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+2. Install Dependencies:
+   npm i
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+3. Start the Development Server:
+   npm run dev or npm start
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Core Features 4. Node Resizing Implementation:
+Node resizing is enabled using the NodeResizeControl component from ReactFlow. Each node's resizable property is set to true, allowing users to resize nodes. The dimensions of each node are stored in the node's state to persist changes.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+5. Undo/Redo Implementation:
+   Undo/redo functionality is managed using two arrays: history and future. Every state change (such as node addition, deletion, or modification) is saved in the history array. When undo is triggered, the current state is moved to the future array while the previous state from history is restored. Redo moves the last undone state from future back to history.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+6. Add Payment Provider Node Implementation:
+   A dropdown menu allows users to add payment provider nodes (e.g., Google Pay, Stripe, Apple Pay) to the canvas.
+   Once selected, the node is placed on the canvas at a random position with its label.
+
+7. Delete Node Implementation:
+   Each payment provider node includes a delete button (a red “X” icon).
+   Clicking the delete button removes the node from the canvas, updating the workflow dynamically.
+
+8. Drag and Drop Implementation:
+   Nodes can be dragged and repositioned freely on the canvas.
+   ReactFlow’s built-in drag functionality ensures smooth, real-time movement of nodes.
+
+9. Node Resizing Implementation:
+   Node resizing is enabled using the NodeResizeControl component from ReactFlow.
+   Each node has a resizable property set to true, allowing users to increase or decrease the size of nodes.
+   The system stores the dimensions to persist the resized state.
+
+10. Zoom and Pan Implementation:
+    Users can zoom in or out using the scroll wheel or zoom controls, implemented using the Controls component from ReactFlow.
+    Panning is allowed for easy navigation, making it easier to manage larger workflows.
